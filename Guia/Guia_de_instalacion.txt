@@ -1,0 +1,38 @@
+-Iniciamos la maquina virtual
+-insertamos el comando "sudo bash"
+-Insertamos el comando "sudo apt update"
+-colocamos "sudo apt install apache2"
+- Ingresamos al navegador colocando nuestra IP publica para ver si esta funcionand el servidor de apache
+-Luego de eso instalamos y configuramos MySQL con los siguientes comandos
+-apt install mysql-server
+-mysql_secure_installation
+- Configuramos MySQL de la siguiente manera:
+		Press y|Y for Yes, any other key for No: Enter
+		New password: Introducimos la contraseña 2 veces
+		Remove anonymous users? [Y/n]: Y
+		Disallow root login remotely? [Y/n]: Y
+		Remove test database and access to it? [Y/n]:  Y
+		Reload privilege tables now? [Y/n]:  Y
+-Instalamos php con: "apt install php libapache2-mod-php php-mysql php-curl php-mbstring php-gd php-xml php-xmlrpc php-soap php-intl php-zip"
+-Introduciomos el siguiente codigo en el fichero ubicado en "/var/www/html/info.php"
+		<?php
+
+		phpinfo();
+
+		?>
+-Ingresams al navegador para ver si se instal´correctamente php
+- Nos dirigimos a la carpeta html y descargamos WordPress"wget -c http://wordpress.org/latest.tar.gz"
+-descomprimimos el archivo con "tar -xzvf latest.tar.gz"
+- Pedimos los siguientes permisos " chown -R www-data:www-data /var/www/html/wordpress; chmod -R 755 /var/www/html/wordpress/"
+-Creamos la base de datos con "mysql -u root -p"
+-La configuramos de la siguiente manera: 
+	mysql> CREATE DATABASE wordpress_db;
+	mysql> GRANT ALL PRIVILEGES ON wordpress_db.* TO ‘usuario‘@’localhost’ IDENTIFIED BY ‘contraseña‘;
+	mysql> FLUSH PRIVILEGES;
+	mysql> EXIT;
+-Nos dirigimos a la carpeta wordpress y cambiamos el fichere que viene por defecto con "mv wp-config-sample.php wp-config.php"
+- Editamos dicho fichero y escribimos : 
+	define(‘DB_NAME’, ‘wordpress_db’);
+	define(‘DB_USER’, ‘usuario’);
+	define(‘DB_PASSWORD’, ‘contraseña’);
+-Con estos pasos ya hemos finalizado y solo queda configurar el wordpress desde el navegador.
